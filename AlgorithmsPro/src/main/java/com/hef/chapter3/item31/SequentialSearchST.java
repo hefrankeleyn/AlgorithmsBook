@@ -1,0 +1,116 @@
+package com.hef.chapter3.item31;
+
+import java.util.Iterator;
+
+/**
+ * @Date 2020/4/18
+ * @Author lifei
+ */
+public class SequentialSearchST<Key,Value> {
+
+    private Node first;
+    private int N;
+
+    private class Node{
+        Key key;
+        Value value;
+        Node next;
+
+        public Node(Key key, Value value, Node next){
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+    /**
+     * put key-value pair into the table
+     * @param key
+     * @param value
+     */
+    public void put(Key key, Value value){
+        // Search for key, return associated value
+        for (Node node=first;node!=null;node = node.next){
+            if (key.equals(node.key)){
+                node.value = value;
+                return;
+            }
+        }
+        first = new Node(key, value, first);
+        N++;
+    }
+
+    /**
+     * value paired with key
+     * @param key
+     * @return
+     */
+    public Value get(Key key){
+        for (Node node = first; node!=null; node = node.next){
+            if (key.equals(node.key)){
+                return node.value;
+            }
+        }
+        return null;
+    }
+
+    public int size(){
+        return N;
+    }
+
+    /**
+     * all keys in the table, in sorted order
+     * @return
+     */
+    public Iterable<Key> keys(){
+        return new KeyIterable();
+    }
+
+    private class KeyIterable implements Iterable<Key>{
+
+        @Override
+        public Iterator<Key> iterator() {
+            return new KeyIterator();
+        }
+    }
+
+    private class KeyIterator implements Iterator<Key>{
+        private Node current = first;
+        @Override
+        public boolean hasNext() {
+            return current!=null;
+        }
+
+        @Override
+        public Key next() {
+            Key key = current.key;
+            current = current.next;
+            return key;
+        }
+    }
+
+    /**
+     * remove key (and its value) from table
+     * @param key
+     */
+    public void delete(Key key){
+        if (first==null){
+            return;
+        } else if (key.equals(first.key)){
+            first = first.next;
+            N--;
+            return;
+        }else {
+            for (Node node=first,next=first.next;next!=null;node = node.next,next = next.next){
+                if (key.equals(next.key)){
+                    if (node==first){
+                        node.next = next.next;
+                        N--;
+                        return;
+                    }
+                }
+            }
+        }
+
+    }
+}
