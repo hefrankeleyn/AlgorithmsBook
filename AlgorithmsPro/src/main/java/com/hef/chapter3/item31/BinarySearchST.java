@@ -20,6 +20,30 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         return N;
     }
 
+    /**
+     * recursive
+     * @param key
+     * @param lo
+     * @param hi
+     * @return
+     */
+    public int rankRecursive(Key key,int lo, int hi){
+        if (lo>hi) return lo;
+        int mid = lo + (hi-lo)/2;
+        int midComp = key.compareTo(keys[mid]);
+        if (midComp<0){
+            return rankRecursive(key, lo, midComp-1);
+        }else if (midComp>0){
+            return rankRecursive(key, midComp+1, hi);
+        }else {
+            return mid;
+        }
+    }
+    /**
+     * directly
+     * @param key
+     * @return
+     */
     public int rank(Key key){
         int lo = 0, hi = N -1;
         while (lo <= hi){
