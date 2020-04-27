@@ -1,5 +1,7 @@
 package com.hef.chapter3.item31;
 
+import com.hef.algorithms.fundamentals.bags_queues_stacks.Queue;
+
 /**
  * @Date 2020/4/26
  * @Author lifei
@@ -19,6 +21,80 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     public int size(){
         return N;
     }
+
+    /**
+     * smallest key
+     * @return
+     */
+    public Key min(){
+        if (isEmpty()){
+            return null;
+        }else {
+            return keys[0];
+        }
+    }
+
+    /**
+     * key of rank k
+     * @param k
+     * @return
+     */
+    public Key select(int k){
+        if (isEmpty() || k>N){
+            return null;
+        }else {
+            return keys[k];
+        }
+    }
+
+    /**
+     * smallest key greater than or equal to key
+     * @param key
+     * @return
+     */
+    public Key ceiling(Key key){
+        int i = rank(key);
+        int com = keys[i].compareTo(key);
+        if (com<0 && com==N-1){
+            return null;
+        }else if(com==0){
+            return keys[i];
+        }else {
+            return keys[i+1];
+        }
+    }
+
+    /**
+     * largest key less than or equal to key
+     * @param key
+     * @return
+     */
+    public Key floor(Key key){
+        int i = rank(key);
+        int com = keys[i].compareTo(key);
+        if (keys[i].compareTo(key)>0){
+            return null;
+        }else {
+            return keys[i];
+        }
+    }
+
+
+
+
+    /**
+     * largest key
+     * @return
+     */
+    public Key max(){
+        if (isEmpty()){
+            return null;
+        }else {
+            return keys[N-1];
+        }
+    }
+
+
 
     /**
      * recursive
@@ -92,5 +168,21 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
                 values[j] = values[j+1];
             }
         }
+    }
+
+    public boolean contain(Key key){
+        int i = rank(key);
+        return keys[i].compareTo(key)==0;
+    }
+
+    public Iterable<Key> keys(Key lo, Key hi){
+        Queue<Key> q = new Queue<>();
+        for (int i = rank(lo); i< rank(hi); i++){
+            q.enqueue(keys[i]);
+        }
+        if (contain(hi)){
+            q.enqueue(keys[rank(hi)]);
+        }
+        return q;
     }
 }
