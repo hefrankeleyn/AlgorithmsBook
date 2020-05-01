@@ -3,4 +3,5 @@
 AlgorithmsPro/.idea/*
 AlgorithmsPro/*.iml
 AlgorithmsPro/target/*
+AlgorithmsPro/src/test/*.iml
 
