@@ -30,6 +30,7 @@ public class SequentialSearchST<Key,Value> implements ST<Key,Value> {
      * @param key
      * @param value
      */
+    @Override
     public void put(Key key, Value value){
         // Search for key, return associated value
         for (Node node=first;node!=null;node = node.next){
@@ -47,6 +48,7 @@ public class SequentialSearchST<Key,Value> implements ST<Key,Value> {
      * @param key
      * @return
      */
+    @Override
     public Value get(Key key){
         for (Node node = first; node!=null; node = node.next){
             if (key.equals(node.key)){
@@ -56,14 +58,21 @@ public class SequentialSearchST<Key,Value> implements ST<Key,Value> {
         return null;
     }
 
+    @Override
     public int size(){
         return N;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return N==0;
     }
 
     /**
      * all keys in the table, in sorted order
      * @return
      */
+    @Override
     public Iterable<Key> keys(){
         return new KeyIterable();
     }
@@ -95,6 +104,7 @@ public class SequentialSearchST<Key,Value> implements ST<Key,Value> {
      * remove key (and its value) from table
      * @param key
      */
+    @Override
     public void delete(Key key){
         if (first==null){
             return;
@@ -113,6 +123,5 @@ public class SequentialSearchST<Key,Value> implements ST<Key,Value> {
                 }
             }
         }
-
     }
 }
