@@ -1,12 +1,14 @@
 package com.hef.chapter3.item31;
 
+import com.hef.chapter3.item31.exercises.ST;
+
 import java.util.Iterator;
 
 /**
  * @Date 2020/4/18
  * @Author lifei
  */
-public class SequentialSearchST<Key,Value> {
+public class SequentialSearchST<Key,Value> implements ST<Key,Value> {
 
     private Node first;
     private int N;
