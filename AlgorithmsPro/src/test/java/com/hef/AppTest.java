@@ -18,4 +18,9 @@ public class AppTest
     {
         assertTrue( true );
     }
+
+    @Test
+    public void test01(){
+        String s = "";
+    }
 }
