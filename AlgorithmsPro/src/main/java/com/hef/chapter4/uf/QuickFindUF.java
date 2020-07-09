@@ -5,12 +5,13 @@ import com.hef.commons.StdIn;
 import com.hef.commons.StdOut;
 
 /**
+ * quick find
  * @author lifei
  * @since 2020/7/10
  */
-public class UnionFind extends UF {
+public class QuickFindUF extends UF {
 
-    public UnionFind(int N){
+    public QuickFindUF(int N){
         super(N);
     }
 
@@ -37,8 +38,8 @@ public class UnionFind extends UF {
 
     /**
      * 运行 示例
-     * $ javac com/hef/chapter4/uf/UnionFind.java
-     * $ java com/hef/chapter4/uf/UnionFind < com/hef/chapter4/uf/tinyUF.txt
+     * $ javac com/hef/chapter4/uf/QuickFindUF.java
+     * $ java com/hef/chapter4/uf/QuickFindUF < com/hef/chapter4/uf/tinyUF.txt
      * 4 3
      * 3 8
      * 6 5
@@ -52,7 +53,7 @@ public class UnionFind extends UF {
      */
     public static void main(String[] args) {
         int N = StdIn.readInt();
-        UF uf = new UnionFind(N);
+        UF uf = new QuickFindUF(N);
         while (!StdIn.isEmpty()){
             int p = StdIn.readInt();
             int q = StdIn.readInt();
